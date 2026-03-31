@@ -96,15 +96,18 @@ function mapMealCategoryToDrinkIngredient(category) {
   return mealCategoryToCocktailIngredient[category] || "cola";
 }
 
-/*
-Fetch a Cocktail Using a Spirit from TheCocktailDB
-Returns Promise that resolves to cocktail object
-We call https://www.thecocktaildb.com/api/json/v1/1/search.php?s=DRINK_INGREDIENT to get a list of cocktails
-Don't forget encodeURIComponent()
-If no cocktails found, fetch random
-*/
 function fetchCocktailByDrinkIngredient(drinkIngredient) {
-    // Fill in
+    return fetch(
+        `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${encodeURIComponent(drinkIngredient)}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.drinks) {
+                return data.drinks[0];
+            } 
+            else {
+                return fetchRandomCocktail();
+            }
+        });
 }
 
 /*
