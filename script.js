@@ -64,9 +64,29 @@ Receives a meal object with fields like:
   strIngredientX, strMeasureX, etc.
 */
 function displayMealData(meal) {
-    // Fill in
-}
+    const container = document.getElementById("meal-container");
 
+    // Samle ingredienser og mål i en liste
+    let ingredientsHTML = "<ul>";
+    for (let i = 1; i <= 20; i++) {
+        const ingredient = meal[`strIngredient${i}`];
+        const measure = meal[`strMeasure${i}`];
+        if (ingredient && ingredient.trim() !== "") {
+            ingredientsHTML += `<li>${measure ? measure.trim() : ""} ${ingredient.trim()}</li>`;
+        }
+    }
+    ingredientsHTML += "</ul>";
+
+    container.innerHTML = `
+        <h2>${meal.strMeal}</h2>
+        <p><strong>Kategori:</strong> ${meal.strCategory}</p>
+        <img src="${meal.strMealThumb}" alt="${meal.strMeal}" />
+        <h3>Ingredienser</h3>
+        ${ingredientsHTML}
+        <h3>Fremgangsmåte</h3>
+        <p>${meal.strInstructions}</p>
+    `;
+}
 /*
 Convert MealDB Category to a TheCocktailDB Spirit
 Looks up category in our map, or defaults to 'cola'
