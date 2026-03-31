@@ -122,11 +122,28 @@ function fetchRandomCocktail() {
         });
 }
 
-/*
-Display Cocktail Data in the DOM
-*/
 function displayCocktailData(cocktail) {
-    // Fill in
+    const container = document.getElementById("cocktail-container");
+
+    let ingredientsHTML = "<ul>";
+    for (let i = 1; i <= 15; i++) {
+        const ingredient = cocktail[`strIngredient${i}`];
+        const measure = cocktail[`strMeasure${i}`];
+
+        if (ingredient && ingredient.trim() !== "") {
+            ingredientsHTML += `<li>${measure ? measure.trim() : ""} ${ingredient.trim()}</li>`;
+        }
+    }
+    ingredientsHTML += "</ul>";
+
+    container.innerHTML = `
+        <h2>${cocktail.strDrink}</h2>
+        <img src="${cocktail.strDrinkThumb}" alt="${cocktail.strDrink}" />
+        <h3>Ingredients</h3>
+        ${ingredientsHTML}
+        <h3>Instructions</h3>
+        <p>${cocktail.strInstructions}</p>
+    `;
 }
 
 /*
