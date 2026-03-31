@@ -114,9 +114,9 @@ function displayCocktailData(cocktail) {
     container.innerHTML = `
         <h2>${cocktail.strDrink}</h2>
         <img src="${cocktail.strDrinkThumb}" alt="${cocktail.strDrink}" />
-        <h3>Ingredients</h3>
+        <h3>Ingredienser</h3>
         ${ingredientsHTML}
-        <h3>Instructions</h3>
+        <h3>Fremgangsmåte</h3>
         <p>${cocktail.strInstructions}</p>
     `;
 }
